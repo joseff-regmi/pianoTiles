@@ -1,0 +1,254 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.home-and-piano {
+  max-width: 768px;
+  min-width: 300px;
+  background: url(../images/bg.jpg);
+  background-size: cover;
+  margin: auto;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.dollar-diamond {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  z-index: 2;
+  display: flex;
+  color: white;
+}
+
+.dollar-diamond img {
+  margin-right: 10px;
+}
+
+.dollar-diamond span {
+  margin-right: 25px;
+}
+
+.coin-container {
+  height: 40px;
+  background-color: black;
+  opacity: 0.1;
+}
+
+.btn-container {
+  padding: 5%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.btn-left {
+  margin: 0%;
+  width: 20%;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  background: transparent;
+  height: 30px;
+  border: 0px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
+    rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+
+.btn-left:active,
+.btn-left:hover {
+  background: white;
+}
+
+.btn-right {
+  margin: 0%;
+  width: 20%;
+  height: 30px;
+  border-left: 1px solid blue;
+  background: transparent;
+  border-top: 0px;
+  border-right: 0px;
+  border-bottom: 0px;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
+    rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+
+.btn-right:active,
+.btn-right:hover {
+  background: white;
+}
+
+.sw-img-container {
+  display: inline-block;
+  padding: 20px;
+  background: url(../images/swbg.png);
+  border-radius: 50%;
+  border: 3px solid white;
+  margin-top: -65px;
+  z-index: 2;
+}
+
+.info-container {
+  height: 200px;
+  background: black;
+  border-radius: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 95px;
+  position: relative;
+  background: linear-gradient(to top right, #b45aff, #802eff);
+}
+
+#corwn-id {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+}
+
+.info {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-evenly;
+  color: white;
+}
+
+.music-container {
+  background: white;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 20px;
+  margin-top: 35px;
+  text-align: left;
+}
+
+.music-container img[alt~="child"] {
+  border-radius: 20px;
+  float: left;
+  width: 20%;
+  height: 112px;
+}
+
+.music-info {
+  padding-top: 10px;
+  float: left;
+  padding-right: 3%;
+  width: 80%;
+}
+
+.music-info span {
+  color: #469bba;
+}
+
+.fav-btn {
+  width: 35px;
+  height: 30px;
+  border: 0px;
+  background: url(../images/heart-grey.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  float: right;
+}
+
+.fav-btn:hover {
+  background: url(../images/heart.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.clearfix::after,
+.clearfix::before {
+  content: " ";
+  display: block;
+  clear: both;
+}
+
+.play-btn {
+  width: 70px;
+  height: 30px;
+  border: 2px solid #5bb7e8;
+  background: url(../images/play-blue.png);
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  float: right;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.play-btn:hover,
+.play-btn:active {
+  background-image: url(../images/play.png);
+  background-color: #2d76e7;
+}
+
+.music-info-bottom {
+  float: left;
+  display: block;
+  width: 80%;
+  margin-top: 3%;
+  padding-right: 3%;
+}
+
+.bottom-nav {
+  width: 100%;
+  position: sticky;
+  bottom: 0px;
+  background: linear-gradient(to top right, #b45aff, #802eff);
+}
+
+.btn {
+  width: 33.3%;
+  float: left;
+}
+
+.btn:hover {
+  background-color: white;
+}
+
+.btn button {
+  border-radius: 50%;
+  padding: 10px;
+  background-color: #2d76e7;
+  border: 1px solid white;
+  margin-top: -50px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+#trophy {
+  background: #fb6705;
+}
+
+#piano-id {
+  display: none;
+}
+
+.gap {
+  height: 45px;
+}
+
+.v-line {
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  z-index: 3;
+  background: white;
+}
+
+#line-id-first {
+  left: 25%;
+}
+#line-id-second {
+  left: 50%;
+}
+#line-id-third {
+  left: 75%;
+}

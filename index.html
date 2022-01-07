@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Piano Tiles</title>
+  </head>
+  <body>
+    <section>
+      <div class="home-and-piano">
+        <div class="dollar-diamond home">
+          <img src="images/dollar.png" alt="dollar" width="20" /><span>0</span>
+          <img src="images/diamond.png" alt="diamond" width="20" /><span
+            >0</span
+          >
+        </div>
+        <div class="coin-container home"></div>
+        <div class="btn-container home">
+          <button class="btn-left">
+            <img src="images/all-nav.png" alt="all-nav" width="45" />
+          </button>
+          <button class="btn-right">
+            <img src="images/heart.png" alt="heart" width="30" />
+          </button>
+        </div>
+        <div class="info-container home">
+          <div class="sw-img-container">
+            <img src="images/sword.png" alt="swords" width="60" />
+          </div>
+          <img id="corwn-id" src="images/crown.png" alt="crown" width="45" />
+          <div class="info">
+            <span>Win: 0</span><span>Rank: 0</span><span>Points: 0</span>
+          </div>
+        </div>
+        <div class="music-container clearfix home">
+          <img src="images/first.jpg" alt="child" />
+          <div class="music-info clearfix">
+            <span>Reshem firiri</span>
+            <button class="fav-btn"></button>
+          </div>
+          <div class="music-info-bottom clearfix">
+            <img src="images/star-grey.png" alt="star" width="30" />
+            <img src="images/star-grey.png" alt="star" width="30" />
+            <img src="images/star-grey.png" alt="star" width="30" />
+            <button class="play-btn"></button>
+          </div>
+        </div>
+
+        <div class="music-container clearfix home">
+          <img src="images/second.png" alt="child" />
+          <div class="music-info clearfix">
+            <span>Saya Thari Baja</span>
+            <button class="fav-btn"></button>
+          </div>
+          <div class="music-info-bottom clearfix">
+            <img src="images/star-grey.png" alt="star" width="30" />
+            <img src="images/star-grey.png" alt="star" width="30" />
+            <img src="images/star-grey.png" alt="star" width="30" />
+            <button class="play-btn"></button>
+          </div>
+        </div>
+        <div class="gap home"></div>
+
+        <div class="bottom-nav home clearfix">
+          <div class="btn">
+            <button>
+              <img src="images/music.png" alt="music" width="30" height="30" />
+            </button>
+          </div>
+          <div class="btn">
+            <button id="trophy">
+              <img
+                src="images/trophy.png"
+                alt="trophy"
+                width="30"
+                height="30"
+              />
+            </button>
+          </div>
+          <div class="btn">
+            <button>
+              <img src="images/admin.png" alt="admin" width="30" height="30" />
+            </button>
+          </div>
+        </div>
+        <div id="piano-id">
+          <div id="line-id-first" class="v-line"></div>
+          <div id="line-id-second" class="v-line"></div>
+          <div id="line-id-third" class="v-line"></div>
+        </div>
+      </div>
+    </section>
+    <script src="src/configCss.js"></script>
+    <script src="src/index.js"></script>
+    <script src="src/canvas.js"></script>
+  </body>
+</html>
