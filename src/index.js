@@ -1,6 +1,7 @@
 let favSongs = []
 let isStarted = false;
 let tiles = []
+let soundNote = []
 let score = 0
 
 const favBtns = document.getElementsByClassName('fav-btn')
@@ -10,12 +11,12 @@ const playBtns = document.getElementsByClassName('play-btn')
 
 
 const songs = {
-    reshemFiriri: 'music/reshemFiriri.wav',
-    sayathari: 'music/sayathari.wav'}
+    reshemFiriri: 'music/reshemFiriri.mp3',
+    sayathari: 'music/sayathari.ogg'}
 
-const notes = ['A4.aiff', 'Ab4.aiff', 'B4.aiff', 'Bb4.aiff', 'C4.aiff',
-                'D4.aiff', 'Db4.aiff', 'E4.aiff', 'Eb4.aiff', 'F4.aiff',
-                'G4.aiff', 'Gb4.aiff']
+const notes = ['music/notes/A4.ogg', 'music/notes/Ab4.ogg', 'music/notes/B4.ogg', 'music/notes/Bb4.ogg', 'music/notes/C4.ogg',
+                'music/notes/D4.ogg', 'music/notes/Db4.ogg', 'music/notes/E4.ogg', 'music/notes/Eb4.ogg', 'music/notes/F4.ogg',
+                'music/notes/G4.ogg', 'music/notes/Gb4.ogg']
 
 
 const leftBtn = document.querySelector('.btn-left')
@@ -28,6 +29,15 @@ const rightBtn = document.querySelector('.btn-right')
 rightBtn.addEventListener('click', ()=>{
     rightList()
 })
+
+function sounds(){
+    for(let i = 0; i<40; i++){
+        const sound = new Audio(notes[i])
+        soundNote.push(sound)
+    }
+}
+
+sounds()
 
 function leftList(){
     rightBtn.style.background = 'transparent'
@@ -87,17 +97,16 @@ function gamePlay(){
         startDiv.addEventListener('click', ()=>{
         startDiv.style.background = 'blue'
         startDiv.style.opacity = '0.3'
-        isStarted = true
         piano.removeChild(startDiv)
         generateTile()
+
     })
 }
 
-// let isClicked = false;
 
 function generateTile(){
 
-    for(let i = 0; i < 30; i++){
+    for(let i = 0; i < 40; i++){
         var tile = document.createElement('div')
         tile.style.width = '25%'
         tile.style.height = '25%'
@@ -111,36 +120,43 @@ function generateTile(){
 
         tile.addEventListener('click', ()=>{
             score++
+            soundNote[i].play()
             });
         };
 
-    tiles.forEach(tile => setInterval(() => {
-        let positionTop = parseInt(tile.style.top)
+     const speed = setInterval(() => {
+        for(let i = 0; i<tiles.length; i++){
+            let positionTop = parseInt(tiles[i].style.top)
             positionTop++;
+            tiles[i].style.top = `${positionTop}%`
+
+            tiles[i].addEventListener('click', ()=>{
+                tiles[i].style.background = 'rgb(90, 195, 243)'
+                tiles[i].style.boxShadow = 'rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset'
+                tiles[i].style.opacity = '0.3';
+                // isClicked = true
+
+            })
+
+
+            if(positionTop > 75 && tiles[i].style.opacity !== '0.3'){
+                clearInterval(speed)
+                tiles[i].style.background = 'red'
+                gameOver();
+            }
 
             if(positionTop == 105){
-                clearInterval()
-                piano.removeChild(tile)
-            };
+                piano.removeChild(tiles[i])
+            }
+        }
 
-        tile.style.top = `${positionTop}%`
+     }, 20);
 
-        tile.addEventListener('click', ()=>{
-            tile.style.background = 'rgb(90, 195, 243)'
-            tile.style.boxShadow = 'rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset'
-            tile.style.opacity = '0.3';
-            isClicked = true;
-        })
-
-        console.log(positionTop)
-
-        // if(!isClicked && positionTop > 75){
-        //     gameOver()
-        // }
-    },200))
-}
-
+    }
 function gameOver(){
-    console.log('game over')
+    
 }
 
+function bonus(){
+
+}
