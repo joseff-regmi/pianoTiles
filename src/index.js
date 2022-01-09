@@ -95,13 +95,14 @@ function gamePlay(){
         startDiv.style.background = '#2fc1da';
         startDiv.style.color = 'white';
         startDiv.innerHTML = 'start';
-        piano.appendChild(startDiv);
+
+    piano.appendChild(startDiv);
 
         startDiv.addEventListener('click', ()=>{
-        startDiv.style.background = 'blue';
-        startDiv.style.opacity = '0.3';
-        piano.removeChild(startDiv);
-        generateTile();
+            startDiv.style.background = 'blue';
+            startDiv.style.opacity = '0.3';
+            piano.removeChild(startDiv);
+            generateTile();
 
     })
 }
@@ -139,19 +140,19 @@ function generateTile(){
                 tiles[i].style.opacity = '0.3';
                 // isClicked = true
 
-            })
+            });
 
 
             if(positionTop > 75 && tiles[i].style.opacity !== '0.3'){
                 clearInterval(speed);
                 tiles[i].style.background = 'red';
-
                 setTimeout(() => {
                     gameOver(score);
+                    for(let j = 0; j < tiles.length; j++ ){
+                        piano.removeChild(tiles[j]);
+                    };
                 }, 2000);
-            }
-
-            if(positionTop == 105){
+            }else if(positionTop == 105){
                 piano.removeChild(tiles[i]);
             }
         }
@@ -170,6 +171,7 @@ function gameOver(totalScore){
 
     replay.addEventListener('click', (e)=>{
         summary.style.display = 'none';
+        tiles = [];
         gamePlay();
     })
 
