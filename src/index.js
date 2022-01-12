@@ -9,7 +9,6 @@ let star = [];
 let numOfTiles = 50;
 let bonusTiles = [];
 
-
 const favBtns = document.getElementsByClassName('fav-btn');
 const pianoHome = document.getElementById('home-and-piano-id')
 const home = document.getElementsByClassName('home');
@@ -24,6 +23,16 @@ const songNames = document.getElementsByClassName('songs-name');
 const displayScorePiano = document.getElementById('display-score-id');
 const displayCoin = document.getElementById('collected-coin-id');
 const displayStarPiano = document.getElementById('display-star-id');
+const collectedCoinGift = document.getElementById('collected-coin-gift-id');
+const collectedDiamondGift = document.getElementById('collected-diamond-gift-id');
+const infoContainer = document.getElementById('info-container-id');
+const musicContainer = document.getElementsByClassName('music-container');
+const trophyItems = document.getElementById('trophy-items-id');
+const bottomNav = document.getElementById('bottom-nav-id');
+const adminPanel = document.getElementById('admin-panel-id');
+const settings = document.getElementById('settings-id');
+const displayTrophy = document.getElementsByClassName('display-trophy');
+const soundOn = document.getElementById('radio-sound-on');
 const songPath = ['music/reshem.mp3', 'music/sayathari.ogg'];
 const otherSounds = {
     coinColl: 'music/coin.wav',
@@ -31,7 +40,47 @@ const otherSounds = {
     clickSound: 'music/clickSound.wav'
 };
 
+const homeBtn = document.getElementById('home-id')
+homeBtn.addEventListener('click', ()=>{
+    playAudio(otherSounds['clickSound'])
+    for(let i = 0; i < home.length; i++){
+        home[i].style.display = 'block';
+        trophyItems.style.display = 'none';
+    }
 
+    bottomNav.style.display = 'block';
+    adminPanel.style.display = 'none';
+    settings.style.display = 'none';
+    pianoHome.style.height = 'auto';
+})
+
+const trophyBtn = document.getElementById('trophy-id')
+trophyBtn.addEventListener('click', ()=>{
+    infoContainer.style.display = 'none';
+    settings.style.display = 'none';
+    adminPanel.style.display = 'none';
+    trophyItems.style.display = 'block';
+    pianoHome.style.height = '100vh';
+    playAudio(otherSounds['clickSound']);
+
+    for(let i = 0; i < displayTrophy.length; i++){
+        displayTrophy[i].style.display = 'block';
+    }
+
+    for(let i = 0; i < musicContainer.length; i++){
+        musicContainer[i].style.display = 'none';
+    };
+});
+
+const admin = document.getElementById('admin-id');
+admin.addEventListener('click', ()=>{
+    playAudio(otherSounds['clickSound']);
+    pianoHome.style.height = '100vh';
+    homeDisplayNone();
+    bottomNav.style.display = 'block';
+    adminPanel.style.display = 'block';
+    settings.style.display = 'block';
+});
 
 const leftBtn = document.querySelector('.btn-left');
 leftBtn.style.background = 'white';
@@ -72,7 +121,6 @@ for(let i = 0; i < favBtns.length; i++){
     });
 };
 
-
 function favList(favBtn){
     favBtn.style.background = 'url(images/heart.png)';
     favBtn.style.backgroundSize = 'contain';
@@ -103,22 +151,23 @@ function start(song_, index, songName){
 
     piano.appendChild(startDiv);
 
-        startDiv.addEventListener('click', ()=>{
+    startDiv.addEventListener('click', ()=>{
             piano.removeChild(startDiv);
-            playAudio(otherSounds['clickSound'])
-            song_.play()
+            playAudio(otherSounds['clickSound']);
+            song_.play();
             generateTile(song_, index, songName);
-
     });
-
 };
 
-function gamePlay(song_, index, songName){
-
+function homeDisplayNone(){
     for(let i = 0; i < home.length; i++){
         home[i].style.display = 'none';
     };
+}
 
+function gamePlay(song_, index, songName){
+
+        homeDisplayNone();
         piano.style.width = '100%';
         piano.style.height = '100vh';
         piano.style.background = 'url(images/tilesbg.jpg)';
@@ -128,10 +177,8 @@ function gamePlay(song_, index, songName){
         start(song_, index, songName);
 };
 
-
 function generateTile(song_, index, songName){
-
-    for(let i = 0; i < 10; i++){
+    for(let i = 0; i < 30; i++){
         let tile = document.createElement('div');
         tile.style.width = '25%';
         tile.style.height = '25%';
@@ -145,27 +192,26 @@ function generateTile(song_, index, songName){
 
         tile.addEventListener('click', ()=>{
             score++;
-            displayScorePiano.innerHTML = `${score}`
+            displayScorePiano.innerHTML = `${score}`;
             });
         };
 
         moveTile(song_, index, songName);
 
-        const bounsTime = tiles.slice(-1)
+        const bounsTime = tiles.slice(-1);
         bounsTime[0].addEventListener('click',()=>{
             setTimeout(() => {
-                bonus(song_, index, songName)
+                bonus(song_, index, songName);
                 song_.pause();
             }, 2000);
-        })
-
+        });
     };
 
 function moveTile(song_, index, songName){
     const speed = setInterval(() => {
         for(let i = 0; i < tiles.length; i++){
             let positionTop = parseInt(tiles[i].style.top);
-            positionTop ++ ;
+            positionTop ++;
             tiles[i].style.top = `${positionTop}%`;
 
             tiles[i].addEventListener('click', ()=>{
@@ -190,34 +236,36 @@ function moveTile(song_, index, songName){
 };
 
 function playAudio(filePath){
-    const music = new Audio(filePath)
+    if(soundOn.checked == true){
+    const music = new Audio(filePath);
     music.play();
+    };
 }
 
 function gameOver(totalScore, index, songName){
-    playAudio(otherSounds['gameOverSound'])
+    playAudio(otherSounds['gameOverSound']);
 
-    pianoHome.style.height = '100vh'
+    pianoHome.style.height = '100vh';
     summary.style.display ='block';
     summary.style.top ='0px';
     piano.style.display = 'none';
 
-    displaySong.innerHTML = `${songName}`
-    displayScore.innerHTML = `${totalScore}`
-
+    displaySong.innerHTML = `${songName}`;
+    displayScore.innerHTML = `${totalScore}`;
+    collectedCoinGift.innerHTML = `${coin}`;
+    collectedDiamondGift.innerHTML =`${diamond}`;
 
     menu.addEventListener('click', ()=>{
         location.reload();
-        playAudio(otherSounds['clickSound'])
+        playAudio(otherSounds['clickSound']);
     });
-
 
     replay.addEventListener('click', ()=>{
         // summary.style.display = 'none';
         // tiles = [];
         // gamePlay(songs[index], index, songName);
-        location.reload()
-        playAudio(otherSounds['clickSound'])
+        location.reload();
+        playAudio(otherSounds['clickSound']);
     });
 };
 
@@ -237,33 +285,26 @@ function bonus(song_, index, songName){
         piano.appendChild(bonusTile);
 
         bonusTile.addEventListener('click', ()=>{
-            playAudio(otherSounds['coinColl'])
+            playAudio(otherSounds['coinColl']);
             coin++;
-            displayCoin.innerHTML = `${coin}`
-            piano.removeChild(bonusTile)
-
-
+            displayCoin.innerHTML = `${coin}`;
+            piano.removeChild(bonusTile);
             });
         };
-
        moveBonus(score, index, songName);
 };
 
-
-function moveBonus(song_, index, songName, coin, diamond){
+function moveBonus(song_, index, songName){
     const speed = setInterval(() => {
         for(let i = 0; i < bonusTiles.length; i++){
             let positionTop = parseInt(bonusTiles[i].style.top);
             positionTop ++ ;
             bonusTiles[i].style.top = `${positionTop}%`;
-
         };
-
      }, 10);
 
      setTimeout(() => {
          clearInterval(speed);
-         gameOver(song_, index, songName, coin, diamond);
+         gameOver(song_, index, songName);
      }, 6000);
-
 };

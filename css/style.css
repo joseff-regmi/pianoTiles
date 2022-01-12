@@ -19,12 +19,101 @@
   overflow: hidden;
 }
 
+.trophy-items {
+  display: block;
+  width: 100%;
+  display: none;
+}
+
+.trophy-items div {
+  display: inline-block;
+  width: 30%;
+}
+
+.trophy-items img {
+  width: 100%;
+  height: inherit;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.trophy-items span {
+  background-color: white;
+  height: 35px;
+  padding-top: 10px;
+  display: block;
+  margin-top: -5px;
+  color: #2d76e7;
+  font-size: 14px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.admin-panel-items {
+  width: 97%;
+  height: 300px;
+  background: url(../images/purplebg.jpg);
+  background-size: cover;
+  margin: auto;
+  border-radius: 10px;
+  display: none;
+  margin-top: 10px;
+}
+
+.settings {
+  display: none;
+}
+
+.settings span {
+  position: absolute;
+  top: 10px;
+  color: #2d76e7;
+  left: 60px;
+}
+
+.sounds img {
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.controls,
+.sounds {
+  margin: auto;
+  width: 97%;
+  height: 50px;
+  margin-top: 40px;
+  background: white;
+  border-radius: 10px;
+  text-align: left;
+  position: relative;
+}
+
+.controls-warper {
+  display: inline-block;
+  width: 30%;
+}
+
+.btn-warper {
+  display: inline-block;
+  width: 67%;
+  position: absolute;
+  top: 10px;
+  color: #2d76e7;
+  text-align: right;
+}
+
+input[type="radio"] {
+  border: 0px;
+  width: 30px;
+  height: 15px;
+}
+
 .dollar-diamond {
   position: absolute;
   right: 20px;
   top: 10px;
   z-index: 2;
-  display: flex;
+  display: block;
   color: white;
 }
 
