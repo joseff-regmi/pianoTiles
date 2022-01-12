@@ -16,7 +16,7 @@
   margin: auto;
   text-align: center;
   position: relative;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .dollar-diamond {
@@ -199,7 +199,8 @@
 
 .bottom-nav {
   width: 100%;
-  position: sticky;
+  max-width: 768px;
+  position: fixed;
   bottom: 0px;
   background: linear-gradient(to top right, #b45aff, #802eff);
 }
@@ -232,11 +233,11 @@
 }
 
 .gap {
-  height: 45px;
+  height: 80px;
 }
 
 .v-line {
-  width: 1px;
+  width: 2px;
   height: 100%;
   position: absolute;
   z-index: 3;
@@ -315,8 +316,43 @@
 .got_gift {
   height: 25%;
   width: 100%;
-  margin-top: 50px;
+  position: relative;
+  margin-top: 60px;
   background: white;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+
+#display-score-id {
+  font-size: 48px;
+  position: absolute;
+  z-index: 5;
+  top: 10px;
+  left: 48%;
+}
+
+.display-coin {
+  z-index: 5;
+  position: absolute;
+  top: 10px;
+  left: 5%;
+}
+
+.display-collected-coin {
+  position: absolute;
+  top: 5px;
+  left: 40px;
+}
+
+.display-diamond {
+  z-index: 5;
+  position: absolute;
+  top: 10px;
+  left: 80%;
+}
+
+.display-collected-diamond {
+  position: absolute;
+  top: 5px;
+  left: 40px;
 }

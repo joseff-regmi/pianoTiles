@@ -1,25 +1,34 @@
 let favSongs = [];
 let isStarted = false;
 let tiles = [];
-let soundNote = [];
+let songs = [];
 let score = 0;
+let coin = 0;
+let diamond = 0;
+let star = [];
+let numOfTiles = 50;
+let bonusTiles = [];
+
 
 const favBtns = document.getElementsByClassName('fav-btn');
+const pianoHome = document.getElementById('home-and-piano-id')
 const home = document.getElementsByClassName('home');
 const piano = document.getElementById('piano-id');
 const playBtns = document.getElementsByClassName('play-btn');
 const summary = document.getElementById('score-bord-id');
 const menu = document.getElementById('menu-btn-id');
 const replay = document.getElementById('replay-btn-id');
+const displayScore = document.getElementById('song-score-id');
+const displaySong = document.getElementById('song-name-id');
+const songNames = document.getElementsByClassName('songs-name');
+const displayScorePiano = document.getElementById('display-score-id');
+const displayCoin = document.getElementById('collected-coin-id');
+const displayStarPiano = document.getElementById('display-star-id');
+const songPath = ['music/reshem.mp3', 'music/sayathari.ogg'];
+const otherSounds = {
+    coinColl: 'music/coin.wav'
+};
 
-
-const songs = {
-    reshemFiriri: 'music/reshemFiriri.mp3',
-    sayathari: 'music/sayathari.ogg'};
-
-const notes = ['music/notes/A4.ogg', 'music/notes/Ab4.ogg', 'music/notes/B4.ogg', 'music/notes/Bb4.ogg', 'music/notes/C4.ogg',
-                'music/notes/D4.ogg', 'music/notes/Db4.ogg', 'music/notes/E4.ogg', 'music/notes/Eb4.ogg', 'music/notes/F4.ogg',
-                'music/notes/G4.ogg', 'music/notes/Gb4.ogg'];
 
 
 const leftBtn = document.querySelector('.btn-left');
@@ -33,59 +42,49 @@ rightBtn.addEventListener('click', ()=>{
     rightList();
 });
 
-function sounds(){
-    for(let i = 0; i<40; i++){
-        const sound = new Audio(notes[i]);
-        soundNote.push(sound);
+function allSongs(){
+    for(let i = 0; i < songPath.length; i++){
+        const sound = new Audio(songPath[i]);
+        songs.push(sound);
     };
 };
 
-sounds();
+allSongs();
 
 function leftList(){
     rightBtn.style.background = 'transparent';
     leftBtn.style.background = 'white';
-}
+};
 
 function rightList(){
     leftBtn.style.background = 'transparent';
     rightBtn.style.background = 'white';
-}
+};
 
 for(let i = 0; i < favBtns.length; i++){
     favBtns[i].addEventListener('click', ()=>{
     favList(favBtns[i]);
-})}
+    });
+};
 
 
 function favList(favBtn){
     favBtn.style.background = 'url(images/heart.png)';
     favBtn.style.backgroundSize = 'contain';
     favBtn.style.backgroundRepeat = 'no-repeat';
-}
+};
 
 for(let i = 0; i < playBtns.length; i++){
     playBtns[i].addEventListener('click', ()=>{
-        gamePlay();
-    })
-}
+        gamePlay(songs[i], i, songNames[i].innerHTML);
+    });
+};
 
 function randomGenerator(min, max){
     return Math.floor(Math.random() * (max - min + 1) + min);
-}
+};
 
-function gamePlay(){
-
-    for(let i = 0; i < home.length; i++){
-        home[i].style.display = 'none';
-    }
-
-        piano.style.width = '100%';
-        piano.style.height = '100vh';
-        piano.style.background = 'url(images/tilesbg.jpg)';
-        piano.style.display = 'block';
-        piano.style.overflow = 'hidden';
-
+function start(song_, index, songName){
     const startDiv = document.createElement('div');
         startDiv.style.width = '25%';
         startDiv.style.height = '25%';
@@ -99,19 +98,34 @@ function gamePlay(){
     piano.appendChild(startDiv);
 
         startDiv.addEventListener('click', ()=>{
-            startDiv.style.background = 'blue';
-            startDiv.style.opacity = '0.3';
             piano.removeChild(startDiv);
-            generateTile();
+            song_.play()
+            generateTile(song_, index, songName);
 
-    })
-}
+    });
+
+};
+
+function gamePlay(song_, index, songName){
+
+    for(let i = 0; i < home.length; i++){
+        home[i].style.display = 'none';
+    };
+
+        piano.style.width = '100%';
+        piano.style.height = '100vh';
+        piano.style.background = 'url(images/tilesbg.jpg)';
+        piano.style.display = 'block';
+        piano.style.overflow = 'hidden';
+
+        start(song_, index, songName);
+};
 
 
-function generateTile(){
+function generateTile(song_, index, songName){
 
-    for(let i = 0; i < 40; i++){
-        var tile = document.createElement('div');
+    for(let i = 0; i < 10; i++){
+        let tile = document.createElement('div');
         tile.style.width = '25%';
         tile.style.height = '25%';
         tile.style.position = 'absolute';
@@ -124,60 +138,112 @@ function generateTile(){
 
         tile.addEventListener('click', ()=>{
             score++;
-            soundNote[i].play();
+            displayScorePiano.innerHTML = `${score}`
             });
         };
 
-     const speed = setInterval(() => {
-        for(let i = 0; i<tiles.length; i++){
+        moveTile(song_, index, songName);
+
+        const bounsTime = tiles.slice(-1)
+        bounsTime[0].addEventListener('click',()=>{
+            setTimeout(() => {
+                bonus(song_, index, songName)
+                song_.pause();
+            }, 2000);
+        })
+
+    };
+
+function moveTile(song_, index, songName){
+    const speed = setInterval(() => {
+        for(let i = 0; i < tiles.length; i++){
             let positionTop = parseInt(tiles[i].style.top);
-            positionTop++;
+            positionTop ++ ;
             tiles[i].style.top = `${positionTop}%`;
 
             tiles[i].addEventListener('click', ()=>{
                 tiles[i].style.background = 'rgb(90, 195, 243)';
                 tiles[i].style.boxShadow = 'rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset';
                 tiles[i].style.opacity = '0.3';
-                // isClicked = true
-
             });
 
-
-            if(positionTop > 75 && tiles[i].style.opacity !== '0.3'){
+            if(positionTop > 74 && tiles[i].style.opacity !== '0.3'){
+                song_.pause();
                 clearInterval(speed);
                 tiles[i].style.background = 'red';
                 setTimeout(() => {
-                    gameOver(score);
-                    for(let j = 0; j < tiles.length; j++ ){
-                        piano.removeChild(tiles[j]);
-                    };
+                    gameOver(score, index, songName);
                 }, 2000);
-            }else if(positionTop == 105){
+            };
+            if(positionTop == 100 ){
                 piano.removeChild(tiles[i]);
-            }
-        }
+            };
+        };
+     }, 15);
+};
 
-     }, 20);
-
-    }
-function gameOver(totalScore){
+function gameOver(totalScore, index, songName){
+    pianoHome.style.height = '100vh'
     summary.style.display ='block';
     summary.style.top ='0px';
     piano.style.display = 'none';
 
-    menu.addEventListener('click', (e)=>{
+    displaySong.innerHTML = `${songName}`
+    displayScore.innerHTML = `${totalScore}`
+
+    menu.addEventListener('click', ()=>{
         location.reload();
-    })
+    });
 
-    replay.addEventListener('click', (e)=>{
-        summary.style.display = 'none';
-        tiles = [];
-        gamePlay();
-    })
+    replay.addEventListener('click', ()=>{
+        // summary.style.display = 'none';
+        // tiles = [];
+        // gamePlay(songs[index], index, songName);
+        location.reload()
+    });
+};
+
+function bonus(song_, index, songName){
+    for(let i = 0; i < 20; i++){
+        let bonusTile = document.createElement('div');
+        bonusTile.style.width = '25%';
+        bonusTile.style.height = '10%';
+        bonusTile.style.position = 'absolute';
+        bonusTile.style.background = 'url(images/dollar.png)';
+        bonusTile.style.backgroundSize = 'contain';
+        bonusTile.style.backgroundRepeat = 'no-repeat';
+        bonusTile.style.backgroundPosition = '50% 50%'
+        bonusTile.style.left = `${25*randomGenerator(0, 3)}%`;
+        bonusTile.style.top = `-${15*i}%`;
+        bonusTiles.push(bonusTile);
+        piano.appendChild(bonusTile);
+
+        bonusTile.addEventListener('click', ()=>{
+            coin++;
+            displayCoin.innerHTML = `${coin}`
+            piano.removeChild(bonusTile)
+
+            });
+        };
+
+       moveBonus(score, index, songName);
+};
 
 
-}
+function moveBonus(song_, index, songName, coin, diamond){
+    const speed = setInterval(() => {
+        for(let i = 0; i < bonusTiles.length; i++){
+            let positionTop = parseInt(bonusTiles[i].style.top);
+            positionTop ++ ;
+            bonusTiles[i].style.top = `${positionTop}%`;
 
-function bonus(){
+        };
 
-}
+     }, 10);
+
+     setTimeout(() => {
+         clearInterval(speed)
+         gameOver(song_, index, songName, coin, diamond)
+     }, 6000);
+
+};

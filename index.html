@@ -9,7 +9,7 @@
   </head>
   <body>
     <section>
-      <div class="home-and-piano">
+      <div class="home-and-piano" id="home-and-piano-id">
         <div class="dollar-diamond home">
           <img src="images/dollar.png" alt="dollar" width="20" /><span>0</span>
           <img src="images/diamond.png" alt="diamond" width="20" /><span
@@ -37,28 +37,28 @@
         <div class="music-container clearfix home">
           <img src="images/first.jpg" alt="child" />
           <div class="music-info clearfix">
-            <span>Reshem Firiri</span>
+            <span class="songs-name">Reshem Firiri</span>
             <button class="fav-btn"></button>
           </div>
           <div class="music-info-bottom clearfix">
             <img src="images/star-grey.png" alt="star" width="30" />
             <img src="images/star-grey.png" alt="star" width="30" />
             <img src="images/star-grey.png" alt="star" width="30" />
-            <button class="play-btn"></button>
+            <button class="play-btn" id="reshem-firiri-id"></button>
           </div>
         </div>
 
         <div class="music-container clearfix home">
           <img src="images/second.png" alt="child" />
           <div class="music-info clearfix">
-            <span>Saya Thari Baja</span>
+            <span class="songs-name">Saya Thari Baja</span>
             <button class="fav-btn"></button>
           </div>
           <div class="music-info-bottom clearfix">
             <img src="images/star-grey.png" alt="star" width="30" />
             <img src="images/star-grey.png" alt="star" width="30" />
             <img src="images/star-grey.png" alt="star" width="30" />
-            <button class="play-btn"></button>
+            <button class="play-btn" id="saya-thari-baja-id"></button>
           </div>
         </div>
         <div class="gap home"></div>
@@ -89,6 +89,17 @@
           <div id="line-id-first" class="v-line"></div>
           <div id="line-id-second" class="v-line"></div>
           <div id="line-id-third" class="v-line"></div>
+          <div id="display-score-id">0</div>
+          <div class="display-coin" id="display-coin-id">
+            <img src="images/dollar.png" alt="coin" width="30px" />
+            <span class="display-collected-coin" id="collected-coin-id">0</span>
+          </div>
+          <div class="display-diamond" id="display-diamond-id">
+            <img src="images/diamond.png" alt="coin" width="30px" />
+            <span class="display-collected-diamond" id="collected-diamond-id"
+              >0</span
+            >
+          </div>
         </div>
         <div class="score-bord" id="score-bord-id">
           <div class="summary" id="summary-id">
@@ -98,10 +109,25 @@
               <div class="star-rate"></div>
             </div>
             <div>
-              <div class="song-name">Reshem Firiri</div>
-              <div class="song-score">0</div>
+              <div class="song-name" id="song-name-id"></div>
+              <div class="song-score" id="song-score-id">0</div>
             </div>
-            <div class="got_gift"></div>
+            <div class="got_gift">
+              <div class="display-coin" id="display-coin-gift-id">
+                <img src="images/dollar.png" alt="coin" width="30px" />
+                <span class="display-collected-coin" id="collected-coin-gift-id"
+                  >0</span
+                >
+              </div>
+              <div class="display-diamond" id="display-diamond-gift-id">
+                <img src="images/diamond.png" alt="coin" width="30px" />
+                <span
+                  class="display-collected-diamond"
+                  id="collected-diamond-gift-id"
+                  >0</span
+                >
+              </div>
+            </div>
           </div>
           <div class="summary-btns">
             <button class="summary-btn" id="menu-btn-id">
@@ -117,8 +143,6 @@
         </div>
       </div>
     </section>
-    <script src="src/configCss.js"></script>
     <script src="src/index.js"></script>
-    <script src="src/canvas.js"></script>
   </body>
 </html>
