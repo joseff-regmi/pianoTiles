@@ -236,20 +236,49 @@ input[type="radio"] {
   color: #469bba;
 }
 
-.fav-btn {
-  width: 35px;
-  height: 30px;
-  border: 0px;
-  background: url(../images/heart-grey.png);
-  background-size: contain;
-  background-repeat: no-repeat;
+input[type="checkbox"] {
   float: right;
+  top: 10px;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+  background-color: rgb(182, 182, 182);
+  -webkit-appearance: none;
+  position: relative;
+  transform: rotate(45deg);
+  outline: none;
 }
 
-.fav-btn:hover {
-  background: url(../images/heart.png);
-  background-size: contain;
-  background-repeat: no-repeat;
+input[type="checkbox"]:hover {
+  cursor: pointer;
+}
+
+input[type="checkbox"]::before {
+  position: absolute;
+  content: "";
+  background-color: rgb(182, 182, 182);
+  height: 60%;
+  width: 100%;
+  top: -55%;
+  border-radius: 15px 15px 0px 0px;
+}
+
+input[type="checkbox"]::after {
+  position: absolute;
+  content: "";
+  background-color: rgb(182, 182, 182);
+  height: 60%;
+  width: 100%;
+  top: 20%;
+  right: 78%;
+  transform: rotate(-90deg);
+  border-radius: 15px 15px 0px 0px;
+}
+
+input[type="checkbox"]:checked,
+input:checked[type="checkbox"]::before,
+input:checked[type="checkbox"]::after {
+  background: #e747a4;
 }
 
 .clearfix::after,
