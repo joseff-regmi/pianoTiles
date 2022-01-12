@@ -26,7 +26,9 @@ const displayCoin = document.getElementById('collected-coin-id');
 const displayStarPiano = document.getElementById('display-star-id');
 const songPath = ['music/reshem.mp3', 'music/sayathari.ogg'];
 const otherSounds = {
-    coinColl: 'music/coin.wav'
+    coinColl: 'music/coin.wav',
+    gameOverSound: 'music/gameOver.wav',
+    clickSound: 'music/clickSound.wav'
 };
 
 
@@ -35,11 +37,13 @@ const leftBtn = document.querySelector('.btn-left');
 leftBtn.style.background = 'white';
 leftBtn.addEventListener('click', ()=>{
     leftList();
+    playAudio(otherSounds['clickSound']);
 });
 
 const rightBtn = document.querySelector('.btn-right');
 rightBtn.addEventListener('click', ()=>{
     rightList();
+    playAudio(otherSounds['clickSound']);
 });
 
 function allSongs(){
@@ -64,6 +68,7 @@ function rightList(){
 for(let i = 0; i < favBtns.length; i++){
     favBtns[i].addEventListener('click', ()=>{
     favList(favBtns[i]);
+    playAudio(otherSounds['clickSound'])
     });
 };
 
@@ -77,6 +82,7 @@ function favList(favBtn){
 for(let i = 0; i < playBtns.length; i++){
     playBtns[i].addEventListener('click', ()=>{
         gamePlay(songs[i], i, songNames[i].innerHTML);
+        playAudio(otherSounds['clickSound'])
     });
 };
 
@@ -99,6 +105,7 @@ function start(song_, index, songName){
 
         startDiv.addEventListener('click', ()=>{
             piano.removeChild(startDiv);
+            playAudio(otherSounds['clickSound'])
             song_.play()
             generateTile(song_, index, songName);
 
@@ -182,7 +189,14 @@ function moveTile(song_, index, songName){
      }, 15);
 };
 
+function playAudio(filePath){
+    const music = new Audio(filePath)
+    music.play();
+}
+
 function gameOver(totalScore, index, songName){
+    playAudio(otherSounds['gameOverSound'])
+
     pianoHome.style.height = '100vh'
     summary.style.display ='block';
     summary.style.top ='0px';
@@ -191,15 +205,19 @@ function gameOver(totalScore, index, songName){
     displaySong.innerHTML = `${songName}`
     displayScore.innerHTML = `${totalScore}`
 
+
     menu.addEventListener('click', ()=>{
         location.reload();
+        playAudio(otherSounds['clickSound'])
     });
+
 
     replay.addEventListener('click', ()=>{
         // summary.style.display = 'none';
         // tiles = [];
         // gamePlay(songs[index], index, songName);
         location.reload()
+        playAudio(otherSounds['clickSound'])
     });
 };
 
@@ -219,9 +237,11 @@ function bonus(song_, index, songName){
         piano.appendChild(bonusTile);
 
         bonusTile.addEventListener('click', ()=>{
+            playAudio(otherSounds['coinColl'])
             coin++;
             displayCoin.innerHTML = `${coin}`
             piano.removeChild(bonusTile)
+
 
             });
         };
@@ -242,8 +262,8 @@ function moveBonus(song_, index, songName, coin, diamond){
      }, 10);
 
      setTimeout(() => {
-         clearInterval(speed)
-         gameOver(song_, index, songName, coin, diamond)
+         clearInterval(speed);
+         gameOver(song_, index, songName, coin, diamond);
      }, 6000);
 
 };
