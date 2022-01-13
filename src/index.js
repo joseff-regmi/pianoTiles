@@ -40,19 +40,44 @@ const otherSounds = {
     clickSound: 'music/clickSound.wav'
 };
 
+const tunes = { 
+    reshemFiriri : ['music/resam/1.ogg', 'music/resam/2.ogg', 'music/resam/3.ogg', 'music/resam/4.ogg', 'music/resam/5.ogg',
+            'music/resam/6.ogg','music/resam/7.ogg', 'music/resam/8.ogg', 'music/resam/9.ogg', 'music/resam/10.ogg', 'music/resam/11.ogg',
+            'music/resam/12.ogg', 'music/resam/13.ogg', 'music/resam/14.ogg', 'music/resam/15.ogg','music/resam/16.ogg', 'music/resam/17.ogg',
+            'music/resam/18.ogg', 'music/resam/19.ogg', 'music/resam/20.ogg', 'music/resam/21.ogg', 'music/resam/22.ogg', 'music/resam/23.ogg',
+            'music/resam/24.ogg', 'music/resam/25.ogg', 'music/resam/26.ogg', 'music/resam/27.ogg', 'music/resam/28.ogg', 'music/resam/29.ogg',
+            'music/resam/30.ogg', 'music/resam/31.ogg', 'music/resam/32.ogg', 'music/resam/33.ogg', 'music/resam/34.ogg', 'music/resam/35.ogg',
+            'music/resam/36.ogg', 'music/resam/37.ogg', 'music/resam/38.ogg', 'music/resam/39.ogg', 'music/resam/40.ogg', 'music/resam/41.ogg',
+            'music/resam/42.ogg', 'music/resam/43.ogg', 'music/resam/44.ogg', 'music/resam/45.ogg', 'music/resam/46.ogg'],
+    
+    sayaThariBaja : ['music/sayathari/1.ogg','music/sayathari/2.ogg','music/sayathari/2.ogg','music/sayathari/4.ogg',
+                'music/sayathari/5.ogg','music/sayathari/6.ogg','music/sayathari/7.ogg','music/sayathari/8.ogg','music/sayathari/9.ogg',
+                'music/sayathari/10.ogg','music/sayathari/11.ogg','music/sayathari/12.ogg','music/sayathari/13.ogg','music/sayathari/14.ogg',
+                'music/sayathari/15.ogg','music/sayathari/16.ogg','music/sayathari/17.ogg','music/sayathari/18.ogg','music/sayathari/19.ogg',
+                'music/sayathari/20.ogg','music/sayathari/21.ogg','music/sayathari/22.ogg','music/sayathari/23.ogg','music/sayathari/24.ogg',
+                'music/sayathari/25.ogg','music/sayathari/26.ogg','music/sayathari/27.ogg','music/sayathari/28.ogg','music/sayathari/29.ogg',
+                'music/sayathari/30.ogg','music/sayathari/31.ogg','music/sayathari/32.ogg','music/sayathari/33.ogg','music/sayathari/34.ogg',
+                'music/sayathari/35.ogg','music/sayathari/36.ogg','music/sayathari/37.ogg','music/sayathari/38.ogg','music/sayathari/39.ogg',
+                'music/sayathari/40.ogg','music/sayathari/41.ogg','music/sayathari/42.ogg','music/sayathari/43.ogg','music/sayathari/44.ogg',
+                'music/sayathari/45.ogg','music/sayathari/46.ogg','music/sayathari/47.ogg','music/sayathari/48.ogg','music/sayathari/49.ogg',
+                'music/sayathari/50.ogg','music/sayathari/51.ogg','music/sayathari/52.ogg','music/sayathari/53.ogg','music/sayathari/54.ogg',
+                'music/sayathari/55.ogg','music/sayathari/56.ogg','music/sayathari/57.ogg','music/sayathari/58.ogg','music/sayathari/60.ogg',
+                'music/sayathari/61.ogg','music/sayathari/62.ogg','music/sayathari/63.ogg','music/sayathari/64.ogg','music/sayathari/65.ogg',
+                'music/sayathari/66.ogg','music/sayathari/67.ogg','music/sayathari/68.ogg','music/sayathari/69.ogg']};
+
 const homeBtn = document.getElementById('home-id')
 homeBtn.addEventListener('click', ()=>{
     playAudio(otherSounds['clickSound'])
     for(let i = 0; i < home.length; i++){
         home[i].style.display = 'block';
         trophyItems.style.display = 'none';
-    }
+    };
 
     bottomNav.style.display = 'block';
     adminPanel.style.display = 'none';
     settings.style.display = 'none';
     pianoHome.style.height = 'auto';
-})
+});
 
 const trophyBtn = document.getElementById('trophy-id')
 trophyBtn.addEventListener('click', ()=>{
@@ -65,7 +90,7 @@ trophyBtn.addEventListener('click', ()=>{
 
     for(let i = 0; i < displayTrophy.length; i++){
         displayTrophy[i].style.display = 'block';
-    }
+    };
 
     for(let i = 0; i < musicContainer.length; i++){
         musicContainer[i].style.display = 'none';
@@ -92,6 +117,7 @@ leftBtn.addEventListener('click', ()=>{
 const rightBtn = document.querySelector('.btn-right');
 rightBtn.addEventListener('click', ()=>{
     rightList();
+    favLists(musicContainer);
     playAudio(otherSounds['clickSound']);
 });
 
@@ -116,22 +142,35 @@ function rightList(){
 
 for(let i = 0; i < favBtns.length; i++){
     favBtns[i].addEventListener('click', ()=>{
-    favList(favBtns[i]);
-    playAudio(otherSounds['clickSound'])
+    playAudio(otherSounds['clickSound']);
     });
 };
 
-function favList(favBtn){
-    favBtn.style.background = 'url(images/heart.png)';
-    favBtn.style.backgroundSize = 'contain';
-    favBtn.style.backgroundRepeat = 'no-repeat';
+function favLists(musicContainer){
+    for(let i = 0; i < favBtns.length; i++){
+        if(favBtns[i].checked == true){
+            favSongs.push(musicContainer[i])
+        };
+    };
 };
 
 for(let i = 0; i < playBtns.length; i++){
     playBtns[i].addEventListener('click', ()=>{
         gamePlay(songs[i], i, songNames[i].innerHTML);
-        playAudio(otherSounds['clickSound'])
+        playAudio(otherSounds['clickSound']);
     });
+};
+
+function chooseTune(songName){
+    let songNameL = songName.toLowerCase();
+          songNameL = songNameL.replaceAll(' ', '');
+    let tuneNames = Object.keys(tunes);
+    
+    for(let i = 0; i < tuneNames.length; i ++){
+        if(tuneNames[i].toLowerCase() == songNameL){
+            return tunes[`${tuneNames[i]}`];
+        };
+    };
 };
 
 function randomGenerator(min, max){
@@ -154,7 +193,6 @@ function start(song_, index, songName){
     startDiv.addEventListener('click', ()=>{
             piano.removeChild(startDiv);
             playAudio(otherSounds['clickSound']);
-            song_.play();
             generateTile(song_, index, songName);
     });
 };
@@ -163,7 +201,7 @@ function homeDisplayNone(){
     for(let i = 0; i < home.length; i++){
         home[i].style.display = 'none';
     };
-}
+};
 
 function gamePlay(song_, index, songName){
 
@@ -178,7 +216,8 @@ function gamePlay(song_, index, songName){
 };
 
 function generateTile(song_, index, songName){
-    for(let i = 0; i < 30; i++){
+    const tune = chooseTune(songName)
+    for(let i = 0; i < tune.length; i++){
         let tile = document.createElement('div');
         tile.style.width = '25%';
         tile.style.height = '25%';
@@ -192,20 +231,26 @@ function generateTile(song_, index, songName){
 
         tile.addEventListener('click', ()=>{
             score++;
+            playAudio(tune[i]);
             displayScorePiano.innerHTML = `${score}`;
             });
         };
 
         moveTile(song_, index, songName);
+        lavelHandler(song_, index, songName);
+};
 
-        const bounsTime = tiles.slice(-1);
+
+function lavelHandler(song_, index, songName){
+
+    const bounsTime = tiles.slice(-1);
         bounsTime[0].addEventListener('click',()=>{
             setTimeout(() => {
                 bonus(song_, index, songName);
-                song_.pause();
-            }, 2000);
+            }, 1000);
         });
-    };
+};
+
 
 function moveTile(song_, index, songName){
     const speed = setInterval(() => {
@@ -221,7 +266,6 @@ function moveTile(song_, index, songName){
             });
 
             if(positionTop > 74 && tiles[i].style.opacity !== '0.3'){
-                song_.pause();
                 clearInterval(speed);
                 tiles[i].style.background = 'red';
                 setTimeout(() => {
@@ -240,7 +284,7 @@ function playAudio(filePath){
     const music = new Audio(filePath);
     music.play();
     };
-}
+};
 
 function gameOver(totalScore, index, songName){
     playAudio(otherSounds['gameOverSound']);
@@ -257,7 +301,6 @@ function gameOver(totalScore, index, songName){
 
     menu.addEventListener('click', ()=>{
         location.reload();
-        playAudio(otherSounds['clickSound']);
     });
 
     replay.addEventListener('click', ()=>{
@@ -265,7 +308,6 @@ function gameOver(totalScore, index, songName){
         // tiles = [];
         // gamePlay(songs[index], index, songName);
         location.reload();
-        playAudio(otherSounds['clickSound']);
     });
 };
 
